@@ -40,6 +40,5 @@ export default function calculatePossibleGames() {
     }
   });
 
-  console.log('Possible Games: ', possibleGames);
   console.log('Sum: ', possibleGames.reduce((sum, gameID) => sum + gameID));
 }

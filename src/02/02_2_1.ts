@@ -29,7 +29,6 @@ export default function calculateMinimumSetOfCubes() {
       });
     });
 
-    console.log(`MIN AMOUNT GAME ${gameID}: `, minAmounts);
     powerPerGame.push(minAmounts.red * minAmounts.green * minAmounts.blue);
   });
 

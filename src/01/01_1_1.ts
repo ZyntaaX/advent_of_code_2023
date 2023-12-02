@@ -1,7 +1,8 @@
 import fs from "fs";
 import readline from "readline";
 
-export async function parseInputFromFile1(fileName) {
+export async function parseInputFromFile1() {
+    const fileName = "src/01/input/01.txt";
     const filestream = fs.createReadStream(fileName);
 
     const rl = readline.createInterface({
