@@ -1,5 +1,8 @@
 import fs from 'fs';
 
+/* This is the second try of the second puzzle of day 1.
+Not finished yet due to time constraint. Might be finished later. */
+
 const numbersDict = {
   0: 'zero',
   1: 'one',
@@ -27,7 +30,10 @@ export default function parseFileNumbersAndWords() {
 
 function getFirstAndLastNumberAsNumber(textLine) {
   // Get first word
-  Object.entries(numbersDict).forEach((num) => console.log(num));
+  // eslint-disable-next-line no-unused-vars
+  Object.entries(numbersDict).forEach(([key, value]) => {
+
+  });
   // Get first int
 
   // Get last word
