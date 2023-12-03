@@ -9,7 +9,6 @@ export default function calculateMinimumSetOfCubes() {
 
   lines.forEach((line) => {
     const game = line.match(/Game (\d+): (.+)/);
-    const gameID = parseInt(game[1], 10);
 
     const gameSubsets = game[2].split(';');
 
