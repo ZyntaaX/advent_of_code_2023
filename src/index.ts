@@ -9,7 +9,7 @@ import calculateMinimumSetOfCubes from './02/02_2_1'
 
 // Day 3
 import getSumOfEngineParts from './03/3_1_1'
-import getSumOfGearRatios from './03/3_2_1'
+import calculateGearRatios from './03/3_2_1'
 
 // Day 4
 import calculateTotalPointsInTickets from './04/4_1_1'
@@ -33,7 +33,7 @@ async function Run () {
   // getSumOfEngineParts()
 
   console.log('\nDay 3 - Puzzle 2')
-  getSumOfGearRatios()
+  calculateGearRatios()
 
   // console.log('\nDay 4 - Puzzle 1')
   // calculateTotalPointsInTickets()

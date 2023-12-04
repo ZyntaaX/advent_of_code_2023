@@ -1,131 +1,126 @@
 import fs from 'fs'
 
 const GEAR_SYMBOL: string = '*'
-// const FILE_PATH = './src/03/input/03.txt'
-const FILE_PATH = './src/03/input/example.txt'
 
-export default function getSumOfGearRatios (): void {
+const FILE_PATH = './src/03/input/03.txt'
+
+interface Gear {
+  x: number
+  y: number
+  adjacentNumbers: GridNumber[]
+}
+
+interface GridNumber {
+  value: number
+  row: number
+  startIndex: number
+  endIndex: number
+}
+
+export default function calculateGearRatios (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
+  const gridNumbers: GridNumber[] = buildGridNumbersArray(lines)
+  const grid: string[][] = buildCharGrid(lines)
+
+  const gears: Gear[] = buildGearArray(grid, gridNumbers)
+
+  console.log('Total gear ratio: ', calculateTotalGearRatio(gears.filter((gear) => gear.adjacentNumbers.length === 2)))
+}
+
+function calculateTotalGearRatio (gears: Gear[]): number {
+  let total: number = 0
+  gears.forEach((gear) => {
+    if (gear.adjacentNumbers.length === 0) return
+
+    let gearRatio = 1
+    gear.adjacentNumbers.forEach((num) => {
+      gearRatio *= num.value
+    })
+
+    total += gearRatio
+  })
+
+  return total
+}
+
+function buildCharGrid (lines: string[]): string[][] {
   const charGrid: string[][] = []
+
   // Initialize charGrid with empty arrays for each line
   lines.forEach(() => {
     charGrid.push([])
   })
 
-  const gearRatios: number[] = []
-
   lines.forEach((line, lineIndex) => {
     line.split('').forEach((char, charIndex) => {
-      charGrid[lineIndex][charIndex] = char
+      if (char !== '\r') {
+        charGrid[lineIndex][charIndex] = char
+      }
     })
   })
 
-  for (let y = 0; y < charGrid.length; y++) {
-    for (let x = 0; x < charGrid[y].length; x++) {
-      if (charGrid[y][x] === GEAR_SYMBOL) {
-        const amountOfNumbersAdjacent = getAdjacentNumbersCount(charGrid, x, y)
-
-        if (amountOfNumbersAdjacent.length === 2) {
-          // console.log('RATIO:: ', amountOfNumbersAdjacent[0] * amountOfNumbersAdjacent[1])
-
-          console.log(amountOfNumbersAdjacent)
-          gearRatios.push(amountOfNumbersAdjacent[0] * amountOfNumbersAdjacent[1])
-        }
-      }
-    }
-  }
-
-  // const total = 0
-  // gearRatios.forEach((el) => {
-  //   log.el
-  // })
-  console.log('Gears: ', gearRatios.length)
-
-  console.log('Sum of gear ratios: ', gearRatios.reduce((sum, next) => sum + next))
+  return charGrid
 }
 
-function getAdjacentNumbersCount (charGrid: string[][], x: number, y: number): number[] {
-  const numArr: number[] = []
+function buildGridNumbersArray (lines: string[]): GridNumber[] {
+  const grid: GridNumber[] = []
 
-  const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
+  lines.forEach((row, rowIndex) => {
+    const matches = row.match(/\d+/g)
 
-  for (let i = y + 1; i >= y - 1; i--) {
-    if (i < 0 || i > charGrid.length) continue
+    let previousEndIndex = 0
 
-    if (i === y) {
-      const charToLeft = parseInt(charGrid[i][x - 1])
-      const charToRight = parseInt(charGrid[i][x + 1])
+    if (matches !== null) {
+      matches.forEach((match) => {
+        const startIndex = row.indexOf(match, previousEndIndex)
+        const endIndex = startIndex + match.length - 1
+        previousEndIndex = endIndex
 
-      if (!isNaN(charToRight)) {
-        const number = getDigitFromString(lines[y], x + 1)
-        numArr.push(number)
-      }
-
-      if (!isNaN(charToLeft)) {
-        const number = getDigitFromStringInReverse(lines[i], x)
-        numArr.push(number)
-      }
-
-      continue
+        const gridNumber: GridNumber = {
+          value: parseInt(match),
+          row: rowIndex,
+          startIndex,
+          endIndex
+        }
+        grid.push(gridNumber)
+      })
     }
+  })
 
-    for (let j = x + 1; j >= x - 1; j--) {
-      if (j < 0 || j > charGrid[i].length) continue
+  return grid
+}
 
-      const charToLeft = parseInt(charGrid[i][j - 1])
-      const charToRight = parseInt(charGrid[i][j + 1])
+function buildGearArray (grid: string[][], gridNumbersArr: GridNumber[]): Gear[] {
+  const gears: Gear[] = []
 
-      if (!isNaN(charToLeft) && isNaN(charToRight) && j < x + 1 && j > x - 1) {
-        const number = getDigitFromStringInReverse(lines[i], j)
-        numArr.push(number)
-        j -= number.toString().length - 1
-      } else if (isNaN(charToLeft) && !isNaN(charToRight) && j < x + 1 && j > x - 1) {
-        const number = getDigitFromString(lines[i], j)
-        numArr.push(number)
-        // j--
-      } else if (!isNaN(charToLeft) && !isNaN(charToRight) && j < x + 1 && j > x - 1) {
-        let startIndex = j - 1
-        while (!isNaN(parseInt(charGrid[i][startIndex]))) {
-          startIndex--
+  grid.forEach((row, rowIx) => {
+    row.forEach((col, colIx) => {
+      if (col === GEAR_SYMBOL) {
+        const gear: Gear = {
+          x: colIx,
+          y: rowIx,
+          adjacentNumbers: getAdjacentGridNumbers(colIx, rowIx, gridNumbersArr)
         }
 
-        const number = getDigitFromString(lines[i], startIndex)
-        j -= number.toString().length - 1
-        numArr.push(number)
-      } else if (!isNaN(parseInt(charGrid[i][j])) && isNaN(charToLeft) && isNaN(charToRight)) {
-        // console.log(charGrid[i][j], ' is a lonely number')
-        numArr.push(parseInt(charGrid[i][j]))
-        j--
+        gears.push(gear)
       }
+    })
+  })
 
-      // Immedietaly return as this will does not meet the requirements anyways
-      if (numArr.length > 2) return numArr
+  return gears
+}
+
+function getAdjacentGridNumbers (x: number, y: number, gridNumbersArr: GridNumber[]): GridNumber[] {
+  const adjacentGridNumbers: GridNumber[] = []
+
+  const adjacentRowsGridNumbers: GridNumber[] = gridNumbersArr.filter((num) => num.row >= y - 1 && num.row <= y + 1)
+
+  adjacentRowsGridNumbers.forEach((num) => {
+    if (num.startIndex <= x + 1 && num.endIndex >= x - 1) {
+      adjacentGridNumbers.push(num)
     }
-  }
+  })
 
-  return numArr
-}
-
-function getDigitFromStringInReverse (string: string, startIndex: number): number {
-  const reversedSubstring = string.substring(0, startIndex + 1).split('').reverse().join('')
-  const match = reversedSubstring.match(/\d+/)
-
-  if (match !== null) {
-    return Number(match[0].split('').reverse().join(''))
-  }
-
-  return 0
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getDigitFromString (string: string, startIndex: number): number {
-  const substring = string.substring(startIndex)
-  const match = substring.match(/\d+/)
-
-  if (match !== null) {
-    return Number(match[0])
-  }
-
-  return 0
+  return adjacentGridNumbers
 }
