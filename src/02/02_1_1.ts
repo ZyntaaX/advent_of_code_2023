@@ -1,44 +1,54 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
-import fs from 'fs';
+import fs from 'fs'
 
-export default function calculatePossibleGames() {
+export default function calculatePossibleGames (): void {
   const targetCounts = {
     red: 12,
     green: 13,
-    blue: 14,
-  };
+    blue: 14
+  }
 
-  const possibleGames = [];
+  const possibleGames = []
 
-  const lines = fs.readFileSync('./src/02/input/02.txt', 'utf-8').trim().split('\n');
+  const lines = fs.readFileSync('./src/02/input/02.txt', 'utf-8').trim().split('\n')
 
   lines.forEach((line) => {
-    const game = line.match(/Game (\d+): (.+)/);
-    const gameID = parseInt(game[1], 10);
+    const game = line.match(/Game (\d+): (.+)/)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const gameID = parseInt(game[1], 10)
 
-    const gameSubsets = game[2].split(';');
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    const gameSubsets = game[2].split(';')
 
-    let gameIsPossible = true;
+    let gameIsPossible = true
 
     gameSubsets.forEach((subset) => {
-      const counts = subset.split(',').map((count) => count.trim().split(' '));
+      const counts = subset.split(',').map((count) => count.trim().split(' '))
 
       return counts.some(([amount, color]) => {
-        const targetCount = targetCounts[color];
+        const targetCount = targetCounts[color]
 
-        if (!targetCount || parseInt(amount, 10) > targetCount) {
-          gameIsPossible = false;
-          return true;
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        if (!(targetCount) || parseInt(amount, 10) > targetCount) {
+          gameIsPossible = false
+          return true
         }
-        return false;
-      });
-    });
+        return false
+      })
+    })
 
     if (gameIsPossible) {
-      possibleGames.push(gameID);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      possibleGames.push(gameID)
     }
-  });
+  })
 
-  console.log('Sum: ', possibleGames.reduce((sum, gameID) => sum + gameID));
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  console.log('Sum: ', possibleGames.reduce((sum, gameID) => sum + gameID))
 }

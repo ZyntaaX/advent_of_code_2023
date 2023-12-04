@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs'
 
 /* This is the second try of the second puzzle of day 1.
 Not finished yet due to time constraint. Might be finished later. */
@@ -13,31 +13,31 @@ const numbersDict = {
   6: 'six',
   7: 'seven',
   8: 'eight',
-  9: 'nine',
-};
-
-export default function parseFileNumbersAndWords() {
-  const lines = fs.readFileSync('./src/01/input/01.txt', 'utf-8').trim().split('\n');
-
-  let totalSum = 0;
-  //   for (const line of lines) {
-  lines.forEach((line) => {
-    totalSum += getFirstAndLastNumberAsNumber(line);
-  });
-
-  return totalSum;
+  9: 'nine'
 }
 
-function getFirstAndLastNumberAsNumber(textLine) {
+export default function parseFileNumbersAndWords (): number {
+  const lines = fs.readFileSync('./src/01/input/01.txt', 'utf-8').trim().split('\n')
+
+  let totalSum = 0
+  //   for (const line of lines) {
+  lines.forEach((line) => {
+    totalSum += getFirstAndLastNumberAsNumber(line)
+  })
+
+  return totalSum
+}
+
+function getFirstAndLastNumberAsNumber (textLine): number {
   // Get first word
   // eslint-disable-next-line no-unused-vars
   Object.entries(numbersDict).forEach(([key, value]) => {
 
-  });
+  })
   // Get first int
 
   // Get last word
   // Get last int'
 
-  return textLine;
+  return textLine
 }

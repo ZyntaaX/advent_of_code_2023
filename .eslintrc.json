@@ -9,5 +9,9 @@
         "sourceType": "module"
     },
     "rules": {
+        "@typescript-eslint/prefer-nullish-coalescing": ["warn", {
+            "ignoreConditionalTests": true,
+            "ignoreMixedLogicalExpressions": true
+          }]
     }
 }
