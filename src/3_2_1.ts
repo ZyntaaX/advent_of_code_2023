@@ -2,7 +2,7 @@ import fs from 'fs'
 
 const GEAR_SYMBOL: string = '*'
 
-const FILE_PATH = './src/03/input/03.txt'
+const FILE_PATH = './src/resources/03.txt'
 
 interface Gear {
   x: number
@@ -52,10 +52,10 @@ function buildCharGrid (lines: string[]): string[][] {
     charGrid.push([])
   })
 
-  lines.forEach((line, lineIndex) => {
-    line.split('').forEach((char, charIndex) => {
+  lines.forEach((line, lineIdx) => {
+    line.split('').forEach((char, charIdx) => {
       if (char !== '\r') {
-        charGrid[lineIndex][charIndex] = char
+        charGrid[lineIdx][charIdx] = char
       }
     })
   })
@@ -94,13 +94,13 @@ function buildGridNumbersArray (lines: string[]): GridNumber[] {
 function buildGearArray (grid: string[][], gridNumbersArr: GridNumber[]): Gear[] {
   const gears: Gear[] = []
 
-  grid.forEach((row, rowIx) => {
-    row.forEach((col, colIx) => {
+  grid.forEach((row, rowIdx) => {
+    row.forEach((col, colIdx) => {
       if (col === GEAR_SYMBOL) {
         const gear: Gear = {
-          x: colIx,
-          y: rowIx,
-          adjacentNumbers: getAdjacentGridNumbers(colIx, rowIx, gridNumbersArr)
+          x: colIdx,
+          y: rowIdx,
+          adjacentNumbers: getAdjacentGridNumbers(colIdx, rowIdx, gridNumbersArr)
         }
 
         gears.push(gear)
