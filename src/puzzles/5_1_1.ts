@@ -65,10 +65,8 @@ function getAllLocations (seeds: number[], converters: Converter[]): number[] {
 function convertValue (input: number, converter: Converter): number | null {
   const delta = input - converter.source
 
-  if (delta >= 0 && delta < converter.destination + converter.length) {
-    if (input >= converter.source && input <= converter.source + converter.length) {
-      return converter.destination + delta
-    }
+  if (delta >= 0 && delta < converter.length) {
+    return converter.destination + delta
   }
 
   return null
