@@ -18,10 +18,14 @@ import calculateTotalAmountOfScratchcards from './puzzles/4_2_1'
 // Day 5
 import findClosestLocationNumber from './puzzles/5_1_1'
 import findClosestLocationNumberOfManySeeds from './puzzles/5_2_1'
+import findClosestLocationNumberOptimized from './puzzles/5_2_2'
 
 // Day 6
 import sumOfRaceWins from './puzzles/6_1_1'
 import sumOfRaceWins2 from './puzzles/6_2_1'
+
+// Day 7
+import totalWinnings from './puzzles/7_1_1'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function Run () {
@@ -52,14 +56,23 @@ async function Run () {
   // console.log('\nDay 5 - Puzzle 1')
   // findClosestLocationNumber()
 
-  console.log('\nDay 5 - Puzzle 2')
-  findClosestLocationNumberOfManySeeds()
+  // console.log('\nDay 5 - Puzzle 2')
+  // findClosestLocationNumberOfManySeeds()
+
+  // TODO: Work on this
+  // console.log('\nDay 5 - Puzzle 2 - Optimized')
+  // findClosestLocationNumberOptimized()
 
   // console.log('\nDay 6 - Puzzle 1')
   // sumOfRaceWins()
 
   // console.log('\nDay 6 - Puzzle 1')
   // sumOfRaceWins2()
+
+  console.log('\nDay 7 - Puzzle 1')
+  totalWinnings()
+
+  // console.log('\nDay 7 - Puzzle 2')
 }
 
 void Run()

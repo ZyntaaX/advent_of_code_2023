@@ -8,7 +8,7 @@
     "outDir": "dist",
     "strictNullChecks": true
   },
-  "lib": ["es2015"],
+  "lib": ["es6"],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

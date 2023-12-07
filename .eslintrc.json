@@ -12,6 +12,7 @@
         "@typescript-eslint/prefer-nullish-coalescing": ["warn", {
             "ignoreConditionalTests": true,
             "ignoreMixedLogicalExpressions": true
-          }]
+          }],
+          "quote-props": ["warn", "consistent"]
     }
 }
