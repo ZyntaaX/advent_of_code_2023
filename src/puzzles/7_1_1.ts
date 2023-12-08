@@ -40,7 +40,7 @@ interface Hand {
   rank?: number
 }
 
-export default function totalWinnings (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   let hands: Hand[] = buildHandsArray(lines)

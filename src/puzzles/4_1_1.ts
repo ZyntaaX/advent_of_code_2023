@@ -7,7 +7,7 @@ interface Card {
   points?: number
 }
 
-export default function calculateTotalPointsInTickets (): void {
+export default function (): void {
   const lines = fs.readFileSync('./src/resources/04.txt', 'utf-8').trim().split('\n')
 
   const allCards: Card[] = []

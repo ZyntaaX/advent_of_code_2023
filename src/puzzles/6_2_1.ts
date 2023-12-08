@@ -10,7 +10,7 @@ interface Race {
   distanceToBeat: number
 }
 
-export default function sumOfRaceWins2 (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   const allRaces: Race[] = getAllRaces(lines)

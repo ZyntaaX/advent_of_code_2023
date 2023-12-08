@@ -17,7 +17,7 @@ const FINAL_NODE = 'ZZZ'
 const TYPE_INSTRUCTION = ['L', 'R']
 type Instruction = typeof TYPE_INSTRUCTION[number]
 
-export default function findCorrectNode (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   // First line is our instructions

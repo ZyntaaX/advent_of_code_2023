@@ -2,7 +2,7 @@
 import fs from 'fs'
 import readline from 'readline'
 
-export async function parseInputFromFile2 (): Promise<void> {
+export default async function (): Promise<void> {
   const fileName = 'src/resources/01.txt'
   const filestream = fs.createReadStream(fileName)
 

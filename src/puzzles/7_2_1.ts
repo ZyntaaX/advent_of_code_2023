@@ -42,7 +42,7 @@ interface Hand {
   rank?: number
 }
 
-export default function totalWinningsWithJoker (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   const hands: Hand[] = buildHandsArray(lines)

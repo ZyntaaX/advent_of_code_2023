@@ -18,7 +18,7 @@ const FINAL_NODE_LAST_VALUE = 'Z'
 const TYPE_INSTRUCTION = ['L', 'R']
 type Instruction = typeof TYPE_INSTRUCTION[number]
 
-export default function findCorrectNodesSimultaneously (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   // First line is our instructions
@@ -27,7 +27,7 @@ export default function findCorrectNodesSimultaneously (): void {
   const nodes: Node[] = createNodes(lines)
 
   const nodeStepsToFinnish: number[] = []
-  const startNodes: Node[] = getNodesWithEndValue(nodes, START_NODE_LAST_VALUE)
+  const startNodes: Node[] = nodes.filter((node) => node.value.endsWith(START_NODE_LAST_VALUE))
   startNodes.forEach((node) => {
     nodeStepsToFinnish.push(getStepsBetweenNodes(node, FINAL_NODE_LAST_VALUE, nodes, instructions))
   })
@@ -95,8 +95,4 @@ function getStepsBetweenNodes (start: Node, end: NodeValue, nodes: Node[], instr
   }
 
   return steps
-}
-
-function getNodesWithEndValue (nodes: Node[], value: NodeValue): Node[] {
-  return (nodes.filter((node) => node.value[2] === value) ?? [])
 }

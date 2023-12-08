@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import fs from 'fs'
 
-export default function calculatePossibleGames (): void {
+export default function (): void {
   const targetCounts = {
     red: 12,
     green: 13,

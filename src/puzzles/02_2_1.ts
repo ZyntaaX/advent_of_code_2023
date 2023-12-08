@@ -3,7 +3,7 @@
 
 import fs from 'fs'
 
-export default function calculateMinimumSetOfCubes (): void {
+export default function (): void {
   const lines = fs.readFileSync('./src/resources/02.txt', 'utf-8').trim().split('\n')
 
   const powerPerGame = []

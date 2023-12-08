@@ -16,7 +16,7 @@ const numbersDict = {
   9: 'nine'
 }
 
-export default function parseFileNumbersAndWords (): number {
+export default function (): number {
   const lines = fs.readFileSync('./src/resources/01.txt', 'utf-8').trim().split('\n')
 
   let totalSum = 0

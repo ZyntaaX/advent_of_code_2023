@@ -12,7 +12,7 @@ interface PlayerCard {
   amount: number
 }
 
-export default function calculateTotalAmountOfScratchcards (): void {
+export default function (): void {
   const lines = fs.readFileSync('./src/resources/04.txt', 'utf-8').trim().split('\n')
 
   const allCards: Card[] = []

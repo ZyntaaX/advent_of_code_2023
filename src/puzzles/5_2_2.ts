@@ -27,7 +27,7 @@ interface Seed {
   seedRangeEndExcl: number
 }
 
-export default function findClosestLocationNumberOptimized (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   // Seeds will always be on the first row

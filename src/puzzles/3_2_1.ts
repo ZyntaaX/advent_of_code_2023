@@ -17,7 +17,7 @@ interface GridNumber {
   endIndex: number
 }
 
-export default function calculateGearRatios (): void {
+export default function (): void {
   const lines = fs.readFileSync(FILE_PATH, 'utf-8').trim().split('\n')
 
   const gridNumbers: GridNumber[] = buildGridNumbersArray(lines)

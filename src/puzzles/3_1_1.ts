@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-export default function getSumOfEngineParts (): void {
+export default function (): void {
   const lines = fs.readFileSync('./src/resources/03.txt', 'utf-8').trim().split(/\r\n/)
 
   const partsToSum: number[] = [0]
