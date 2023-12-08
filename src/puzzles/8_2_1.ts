@@ -8,8 +8,8 @@ type NodeValue = string
 
 interface Node {
   value: NodeValue
-  leftNode: NodeValue
-  rightNode: NodeValue
+  leftNode?: Node
+  rightNode?: Node
 }
 
 const START_NODE_LAST_VALUE = 'A'
@@ -29,7 +29,7 @@ export default function findCorrectNodesSimultaneously (): void {
   const nodeStepsToFinnish: number[] = []
   const startNodes: Node[] = getNodesWithEndValue(nodes, START_NODE_LAST_VALUE)
   startNodes.forEach((node) => {
-    nodeStepsToFinnish.push(getStepsBetweenNodes(node.value, FINAL_NODE_LAST_VALUE, nodes, instructions))
+    nodeStepsToFinnish.push(getStepsBetweenNodes(node, FINAL_NODE_LAST_VALUE, nodes, instructions))
   })
 
   console.log('Minimum number of steps: ', findLCM(nodeStepsToFinnish))
@@ -48,20 +48,30 @@ function getInstructions (line: string): Instruction[] {
 function createNodes (lines: string[]): Node[] {
   const nodes: Node[] = []
 
+  const rawValues: string[][] = []
+
   lines.slice(1).forEach((line, index) => {
     const values = line.replace(/\s/g, '').split(/[=(),]/).filter(Boolean)
     if (values.length === 0) return
+
+    rawValues.push(values)
+
     nodes.push({
-      value: values[0],
-      leftNode: values[1],
-      rightNode: values[2]
+      value: values[0]
     })
   })
+
+  rawValues.forEach((value) => {
+    const index = nodes.findIndex((node) => node.value === value[0])
+    nodes[index].leftNode = nodes.find((node) => node.value === value[1])
+    nodes[index].rightNode = nodes.find((node) => node.value === value[2])
+  })
+
   return nodes
 }
 
-function getStepsBetweenNodes (start: NodeValue, end: NodeValue, nodes: Node[], instructions: Instruction[]): number {
-  let currentNode: Node = getNodeWithValue(nodes, start)
+function getStepsBetweenNodes (start: Node, end: NodeValue, nodes: Node[], instructions: Instruction[]): number {
+  let currentNode: Node | undefined = start
 
   let steps = 0
   let currentInstructionIndex = 0
@@ -71,9 +81,9 @@ function getStepsBetweenNodes (start: NodeValue, end: NodeValue, nodes: Node[], 
 
     // Move on to the left or right node depending on instruction
     if (instructions[currentInstructionIndex] === 'R') {
-      currentNode = getNodeWithValue(nodes, currentNode.rightNode)
+      currentNode = currentNode?.rightNode
     } else if (instructions[currentInstructionIndex] === 'L') {
-      currentNode = getNodeWithValue(nodes, currentNode.leftNode)
+      currentNode = currentNode?.leftNode
     }
 
     currentInstructionIndex++
@@ -81,7 +91,7 @@ function getStepsBetweenNodes (start: NodeValue, end: NodeValue, nodes: Node[], 
     if (currentInstructionIndex >= instructions.length) currentInstructionIndex = 0
 
     // We found the end
-    if (currentNode.value[2] === end) break
+    if (currentNode?.value[2] === end) break
   }
 
   return steps
@@ -89,8 +99,4 @@ function getStepsBetweenNodes (start: NodeValue, end: NodeValue, nodes: Node[], 
 
 function getNodesWithEndValue (nodes: Node[], value: NodeValue): Node[] {
   return (nodes.filter((node) => node.value[2] === value) ?? [])
-}
-
-function getNodeWithValue (nodes: Node[], value: NodeValue): Node {
-  return (nodes.find((node) => node.value === value) ?? { value: '', leftNode: '', rightNode: '' })
 }
