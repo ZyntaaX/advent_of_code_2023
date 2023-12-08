@@ -26,6 +26,11 @@ import sumOfRaceWins2 from './puzzles/6_2_1'
 
 // Day 7
 import totalWinnings from './puzzles/7_1_1'
+import totalWinningsWithJoker from './puzzles/7_2_1'
+
+// Day 8
+import findCorrectNode from './puzzles/8_1_1'
+import findCorrectNodesSimultaneously from './puzzles/8_2_1'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function Run () {
@@ -69,10 +74,17 @@ async function Run () {
   // console.log('\nDay 6 - Puzzle 1')
   // sumOfRaceWins2()
 
-  console.log('\nDay 7 - Puzzle 1')
-  totalWinnings()
+  // console.log('\nDay 7 - Puzzle 1')
+  // totalWinnings()
 
   // console.log('\nDay 7 - Puzzle 2')
+  // totalWinningsWithJoker()
+
+  // console.log('\nDay 8 - Puzzle 1')
+  // findCorrectNode()
+
+  console.log('\nDay 8 - Puzzle 2')
+  findCorrectNodesSimultaneously()
 }
 
 void Run()

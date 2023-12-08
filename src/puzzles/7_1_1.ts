@@ -22,7 +22,15 @@ const CardStrength = {
   'A': 14
 }
 
-const handType = ['FIVE_OF_KIND', 'FOUR_OF_KIND', 'FULL_HOUSE', 'THREE_OF_KIND', 'TWO_PAIR', 'ONE_PAIR', 'HIGH_CARD'] as const
+const handType = [
+  'FIVE_OF_KIND',
+  'FOUR_OF_KIND',
+  'FULL_HOUSE',
+  'THREE_OF_KIND',
+  'TWO_PAIR',
+  'ONE_PAIR',
+  'HIGH_CARD'
+] as const
 type HandType = typeof handType[number]
 
 interface Hand {
