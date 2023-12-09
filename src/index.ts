@@ -32,7 +32,7 @@ import Day7_2_1 from './puzzles/7_2_1'
 import Day8_1_1 from './puzzles/8_1_1'
 import Day8_2_1 from './puzzles/8_2_1'
 
-// Day 8
+// Day 9
 import Day9_1_1 from './puzzles/9_1_1'
 import Day9_2_1 from './puzzles/9_2_1'
 
@@ -90,11 +90,11 @@ async function Run () {
   // console.log('\nDay 8 - Puzzle 2')
   // Day8_2_1()
 
-  console.log('\nDay 9 - Puzzle 1')
-  Day9_1_1()
-
   // console.log('\nDay 9 - Puzzle 1')
-  // Day9_2_1()
+  // Day9_1_1()
+
+  console.log('\nDay 9 - Puzzle 1')
+  Day9_2_1()
 }
 
 void Run()
