@@ -8,33 +8,33 @@ import Day2_1_1 from './puzzles/02_1_1'
 import Day2_2_1 from './puzzles/02_2_1'
 
 // Day 3
-import Day3_1_1 from './puzzles/3_1_1'
-import Day3_2_1 from './puzzles/3_2_1'
+import Day3_1_1 from './puzzles/03_1_1'
+import Day3_2_1 from './puzzles/03_2_1'
 
 // Day 4
-import Day4_1_1 from './puzzles/4_1_1'
-import Day4_2_1 from './puzzles/4_2_1'
+import Day4_1_1 from './puzzles/04_1_1'
+import Day4_2_1 from './puzzles/04_2_1'
 
 // Day 5
-import Day5_1_1 from './puzzles/5_1_1'
-import Day5_2_1 from './puzzles/5_2_1'
-import Day5_2_2 from './puzzles/5_2_2'
+import Day5_1_1 from './puzzles/05_1_1'
+import Day5_2_1 from './puzzles/05_2_1'
+import Day5_2_2 from './puzzles/05_2_2'
 
 // Day 6
-import Day6_1_1 from './puzzles/6_1_1'
-import Day6_2_1 from './puzzles/6_2_1'
+import Day6_1_1 from './puzzles/06_1_1'
+import Day6_2_1 from './puzzles/06_2_1'
 
 // Day 7
-import Day7_1_1 from './puzzles/7_1_1'
-import Day7_2_1 from './puzzles/7_2_1'
+import Day7_1_1 from './puzzles/07_1_1'
+import Day7_2_1 from './puzzles/07_2_1'
 
 // Day 8
-import Day8_1_1 from './puzzles/8_1_1'
-import Day8_2_1 from './puzzles/8_2_1'
+import Day8_1_1 from './puzzles/08_1_1'
+import Day8_2_1 from './puzzles/08_2_1'
 
 // Day 9
-import Day9_1_1 from './puzzles/9_1_1'
-import Day9_2_1 from './puzzles/9_2_1'
+import Day9_1_1 from './puzzles/09_1_1'
+import Day9_2_1 from './puzzles/09_2_1'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function Run () {
