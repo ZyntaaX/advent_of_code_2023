@@ -90,10 +90,12 @@ async function Run () {
   // console.log('\nDay 8 - Puzzle 2')
   // Day8_2_1()
 
-  // console.log('\nDay 9 - Puzzle 1')
-  // Day9_1_1()
-
+  // console.time('Speed')
   console.log('\nDay 9 - Puzzle 1')
+  Day9_1_1()
+  // console.timeEnd('Speed')
+
+  console.log('\nDay 9 - Puzzle 2')
   Day9_2_1()
 }
 

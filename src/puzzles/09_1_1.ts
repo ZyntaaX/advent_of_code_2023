@@ -31,20 +31,16 @@ function getPrediction (sequence: Sequence): number {
     currentSequenceArray.push(newSeq)
   }
 
-  const valuesArr: number[] = [0]
-
   let valueForNextIteration: number = 0
-  // -2 cause we want to start at second to last entry in the array
-  for (let i = currentSequenceArray.length - 2; i >= 0; i--) {
-    const currentSequence: Sequence = currentSequenceArray[i]
+  const reversedArr = currentSequenceArray.reverse()
+  for (let i = 0; i < reversedArr.length; i++) {
+    const currentSequence: Sequence = reversedArr[i]
 
     const valueToAdd: number = currentSequence[currentSequence.length - 1] + valueForNextIteration
     valueForNextIteration = valueToAdd
-
-    valuesArr.push(valueToAdd)
   }
 
-  return valuesArr[valuesArr.length - 1]
+  return valueForNextIteration
 }
 
 function getValuesArray (lines: string[]): Sequence[] {
