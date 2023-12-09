@@ -33,7 +33,6 @@ function getPrediction (sequence: Sequence): number {
 
   let valueForNextIteration: number = 0
   const reversedArr = currentSequenceArray.reverse()
-  // -2 cause we want to start at second to last entry in the array
   for (let i = 0; i < reversedArr.length; i++) {
     const currentSequence: Sequence = reversedArr[i]
 
