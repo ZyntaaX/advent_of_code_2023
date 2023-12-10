@@ -2,8 +2,8 @@
 import fs from 'fs'
 import { groupBy } from '../helpers/array_helpers'
 
-const FILE_PATH = './src/resources/05_example.txt'
-// const FILE_PATH = './src/resources/05.txt'
+// const FILE_PATH = './src/resources/05_example.txt'
+const FILE_PATH = './src/resources/05.txt'
 
 const PARSE_LINES_MAP = {
   SEED_TO_SOIL_PARSE_LINE: 'seed-to-soil map:',
@@ -44,6 +44,7 @@ function getClosestLocationInReverse (seeds: Seed[], converters: Converter[]): n
   let currentSeed = 0
   while (true) {
     let currentIterationValue = currentSeed
+    if (currentSeed === 4917124) console.log('THIS SHOULD BE CORRECT')
     let previousConverterType: string = ''
     let typeDone = false
 
@@ -53,6 +54,8 @@ function getClosestLocationInReverse (seeds: Seed[], converters: Converter[]): n
       typeDone = convType.some((conv) => {
         const tempVal = convertValue(currentIterationValue, conv)
         if (tempVal !== null) {
+          console.log(tempVal, conv.type)
+
           currentIterationValue = tempVal
           previousConverterType = conv.type
           return true
@@ -66,7 +69,6 @@ function getClosestLocationInReverse (seeds: Seed[], converters: Converter[]): n
         return currentIterationValue
       }
     })
-    console.log('CurrentVal: ', currentIterationValue)
 
     currentSeed++
   }

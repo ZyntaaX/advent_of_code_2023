@@ -36,6 +36,9 @@ import Day8_2_1 from './puzzles/08_2_1'
 import Day9_1_1 from './puzzles/09_1_1'
 import Day9_2_1 from './puzzles/09_2_1'
 
+// Day 10
+import Day10_1_1 from './puzzles/10_1_1'
+
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 async function Run () {
   // console.log('\nDay 1 - Puzzle 1')
@@ -90,13 +93,14 @@ async function Run () {
   // console.log('\nDay 8 - Puzzle 2')
   // Day8_2_1()
 
-  // console.time('Speed')
-  console.log('\nDay 9 - Puzzle 1')
-  Day9_1_1()
-  // console.timeEnd('Speed')
+  // console.log('\nDay 9 - Puzzle 1')
+  // Day9_1_1()
 
-  console.log('\nDay 9 - Puzzle 2')
-  Day9_2_1()
+  // console.log('\nDay 9 - Puzzle 2')
+  // Day9_2_1()
+
+  console.log('\nDay 10 - Puzzle 1')
+  Day10_1_1()
 }
 
 void Run()
