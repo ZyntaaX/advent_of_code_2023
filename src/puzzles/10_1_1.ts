@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 // const FILE_PATH = './src/resources/10_example.txt'
 const FILE_PATH = './src/resources/10.txt'
 
-type PipeType = '|' | '-' | 'L' | 'J' | '7' | 'F' | 'S'
+type PipeType = '|' | '-' | 'L' | 'J' | '7' | 'F' | 'S' | '.'
 
 const START_POSITION: PipeType = 'S'
 const GROUND_TILE = '.'
@@ -45,6 +45,7 @@ function findLengthOfLoop (pipes: Pipe[]): number {
   if (startPipe?.southPipe !== undefined) directionsToCheck.push({ ...startPipe.southPipe })
 
   let length = -1
+  const visited = new Set<string>()
 
   directionsToCheck.forEach((pipe) => {
     let previousPipe: Pipe = startPipe
@@ -55,7 +56,18 @@ function findLengthOfLoop (pipes: Pipe[]): number {
     if (length !== -1) return
 
     while (true) {
+      const key = `${currentPipe.x}-${currentPipe.y}`
       if (currentPipe?.type === START_POSITION) break
+
+      // Check if the current pipe has already been visited
+      if (visited.has(key)) {
+        // Count ground tiles within the loop
+        const groundTilesCount = countGroundTilesInLoop(pipes, currentPipe, startPipe)
+        console.log('Ground Tiles Count:', groundTilesCount)
+        return
+      }
+
+      visited.add(key)
 
       if (currentPipe.eastPipe !== undefined && !isPipesSame(currentPipe.eastPipe, previousPipe)) {
         previousPipe = currentPipe
@@ -80,6 +92,42 @@ function findLengthOfLoop (pipes: Pipe[]): number {
   })
 
   return length
+}
+
+function countGroundTilesInLoop (pipes: Pipe[], currentPipe: Pipe, startPipe: Pipe): number {
+  let count = 0
+
+  // Traverse the loop again and count ground tiles
+  let previousPipe: Pipe = startPipe
+  let loopPipe: Pipe = currentPipe
+
+  while (true) {
+    if (loopPipe.type === GROUND_TILE) {
+      count++
+    }
+
+    if (loopPipe.type === START_POSITION) {
+      break
+    }
+
+    if (loopPipe.eastPipe !== undefined && !isPipesSame(loopPipe.eastPipe, previousPipe)) {
+      previousPipe = loopPipe
+      loopPipe = loopPipe.eastPipe
+    } else if (loopPipe.westPipe !== undefined && !isPipesSame(loopPipe.westPipe, previousPipe)) {
+      previousPipe = loopPipe
+      loopPipe = loopPipe.westPipe
+    } else if (loopPipe.northPipe !== undefined && !isPipesSame(loopPipe.northPipe, previousPipe)) {
+      previousPipe = loopPipe
+      loopPipe = loopPipe.northPipe
+    } else if (loopPipe.southPipe !== undefined && !isPipesSame(loopPipe.southPipe, previousPipe)) {
+      previousPipe = loopPipe
+      loopPipe = loopPipe.southPipe
+    } else {
+      break
+    }
+  }
+
+  return count
 }
 
 function isPipesSame (pipeA: Pipe, pipeB: Pipe): boolean {
